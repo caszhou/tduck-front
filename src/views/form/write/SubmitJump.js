@@ -1,6 +1,7 @@
-// 跳转url
+/**
+ * 跳转url
+ */
 export function jumpUrl(url, dataId) {
-  console.log(url)
   if (!url) {
     return
   }
@@ -15,6 +16,20 @@ export function jumpUrl(url, dataId) {
   setTimeout(() => {
     window.location.replace(url)
   }, 3000)
+}
+
+/**
+ * pdfJumpUrl
+ */
+export function pdfJumpUrl(url) {
+  if (!url) {
+    return
+  }
+  // 如果url不包含http://或者https://，则自动添加
+  if (url.indexOf('http://') === -1 && url.indexOf('https://') === -1) {
+    url = 'http://' + url
+  }
+  window.location.replace(url)
 }
 
 /**

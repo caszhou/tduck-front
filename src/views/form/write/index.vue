@@ -17,7 +17,7 @@
       <biz-project-form v-if="formConfig.formKey" ref="bizProjectForm" :form-config="formConfig" @submit="submitForm" />
     </div>
     <div v-cloak v-if="writeStatus == 2" class="title-icon-view">
-      <div v-if="contentIsPdf">
+      <div v-if="contentIsPdf" class="pdf-box">
         <img class="pdf-image" src="@/assets/images/pdf.png" alt="" />
         <p>{{ pdfName }}</p>
         <el-button type="primary" @click="pdf" icon="el-icon-view"> 下载/预览 </el-button>
@@ -42,7 +42,7 @@ import { isWxEnv, onlyWxOpenHandle, setWxConfig } from './wx'
 import TduckFormMixin from '../TduckFormMixin'
 import { createFormResultRequest, publicCreateFormResultRequest, viewFormResultRequest } from '@/api/project/data'
 import { checkWritePwdRequest, getPublicSettingsRequest, getWriteSettingStatusRequest } from '@/api/project/setting'
-import { jumpUrl } from './SubmitJump'
+import { jumpUrl, pdfJumpUrl } from './SubmitJump'
 import { checkWriteCountCap, saveWriteCount } from '@/views/form/write/DeviceWriteCount'
 
 const uaParser = require('ua-parser-js')
@@ -268,7 +268,7 @@ export default {
     },
     pdf() {
       if (this.userFormSetting.submitJump && this.contentIsPdf) {
-        jumpUrl(this.userFormSetting.submitJumpUrl, this.submitResult.id)
+        pdfJumpUrl(this.userFormSetting.submitJumpUrl)
       }
     }
   }
@@ -292,6 +292,13 @@ export default {
   flex-direction: column;
   height: 100%;
   width: 100%;
+}
+
+.pdf-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .pdf-image {
