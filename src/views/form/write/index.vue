@@ -20,7 +20,7 @@
       <div v-if="contentIsPdf">
         <img class="pdf-image" src="@/assets/images/pdf.png" alt="" />
         <p>{{ pdfName }}</p>
-        <el-button type="primary" @click="pdf" icon="el-icon-search"> 下载/预览 </el-button>
+        <el-button type="primary" @click="pdf" icon="el-icon-view"> 下载/预览 </el-button>
       </div>
       <div v-else>
         <div v-if="userFormSetting.submitShowType === 2" v-html="userFormSetting.submitShowCustomPageContent" />
