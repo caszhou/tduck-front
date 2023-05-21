@@ -17,7 +17,7 @@ module.exports = {
     // 开发环境默认开启反向代理，如果不需要请自行注释
     proxy: {
       '/tduck-api': {
-        target: 'http://localhost:8999',
+        target: 'http://192.168.2.58:8999',
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_API_ROOT]: ''

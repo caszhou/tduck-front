@@ -17,8 +17,15 @@
       <biz-project-form v-if="formConfig.formKey" ref="bizProjectForm" :form-config="formConfig" @submit="submitForm" />
     </div>
     <div v-cloak v-if="writeStatus == 2" class="title-icon-view">
-      <div v-if="userFormSetting.submitShowType === 2" v-html="userFormSetting.submitShowCustomPageContent" />
-      <el-result v-else :title="'提交成功'" icon="success" />
+      <div v-if="contentIsPdf">
+        <img class="pdf-image" src="@/assets/images/pdf.png" alt="" />
+        <p>{{ pdfName }}</p>
+        <el-button type="primary" @click="pdf" icon="el-icon-search"> 下载/预览 </el-button>
+      </div>
+      <div v-else>
+        <div v-if="userFormSetting.submitShowType === 2" v-html="userFormSetting.submitShowCustomPageContent" />
+        <el-result v-else :title="'提交成功'" icon="success" />
+      </div>
     </div>
   </div>
 </template>
@@ -93,6 +100,20 @@ export default {
         // 考试成绩
         examScoreText: ''
       }
+    }
+  },
+  computed: {
+    contentIsPdf: function contentIsPdf() {
+      return (
+        this.userFormSetting && this.userFormSetting.submitJumpUrl && this.userFormSetting.submitJumpUrl.endsWith('pdf')
+      )
+    },
+    pdfName: function pdfName() {
+      return (
+        this.userFormSetting &&
+        this.userFormSetting.submitJumpUrl &&
+        this.userFormSetting.submitJumpUrl.substring(this.userFormSetting.submitJumpUrl.lastIndexOf('/') + 1)
+      )
     }
   },
   async created() {
@@ -241,8 +262,13 @@ export default {
       // 如果开启了设备填写次数限制 则保存记录
       saveWriteCount(this.formKey)
       this.writeStatus = 2
-      if (this.userFormSetting.submitJump) {
+      if (this.userFormSetting.submitJump && !this.contentIsPdf) {
         jumpUrl(this.userFormSetting.submitJumpUrl, data.id)
+      }
+    },
+    pdf() {
+      if (this.userFormSetting.submitJump && this.contentIsPdf) {
+        jumpUrl(this.userFormSetting.submitJumpUrl, this.submitResult.id)
       }
     }
   }
@@ -266,6 +292,10 @@ export default {
   flex-direction: column;
   height: 100%;
   width: 100%;
+}
+
+.pdf-image {
+  width: 100px;
 }
 
 .icon-view {

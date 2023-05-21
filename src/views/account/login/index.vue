@@ -5,7 +5,7 @@
     </div>
     <div class="logo-content">
       <span class="hello">Hello ，</span>
-      <span class="tips">欢迎使用Tduck！</span>
+      <span class="tips">欢迎使用！</span>
       <el-tabs v-if="formType == 'login'" v-model="loginType" class="login-form-tab">
         <el-tab-pane v-if="enableWx" label="微信扫码登录" name="wx">
           <div class="wx-login">
@@ -65,9 +65,9 @@
         </el-tab-pane>
       </el-tabs>
       <register v-else @success="registerSuccessHandle" />
-      <p class="desc">关于TDuckApp登录</p>
+      <p class="desc">关于App登录</p>
       <p class="desc">
-        若微信扫码失败，请打开 微信授权页面 登录 若QQ登录填鸭云异常， 可查阅
+        若微信扫码失败，请打开 微信授权页面 登录 若QQ登录云异常， 可查阅
         <a href="https://doc.tduckcloud.com">帮助文档</a> 若因微信、QQ、公众号冻结或账号密码找回失败等 无法登录，可
         自助申请 登录账号
       </p>

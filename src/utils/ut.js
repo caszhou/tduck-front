@@ -24,7 +24,10 @@ h = (function () {
     } else {
       timer = null
     }
-    document.getElementById('inActiveTime').innerText = inActiveTime
+    const elementById = document.getElementById('inActiveTime')
+    if (elementById) {
+      elementById.innerText = inActiveTime
+    }
   }
 
   return {

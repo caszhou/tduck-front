@@ -50,7 +50,7 @@
         <router-view />
         <el-footer>
           <div class="about-container">
-            <span class="desc-text"><a href="https://www.tduckcloud.com" target="view_window">TDUCK官网</a></span>
+            <span class="desc-text"><a href="https://www.tduckcloud.com" target="view_window">官网</a></span>
           </div>
         </el-footer>
       </div>
